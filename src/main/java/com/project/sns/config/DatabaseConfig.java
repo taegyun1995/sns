@@ -11,17 +11,20 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
-@MapperScan(basePackages="com.project.memo.*")  // interface(mapper)가 있는 패키지 경로
+@MapperScan(basePackages="com.project.sns.*")
 public class DatabaseConfig {
 	
-    @Bean
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource);
-
-        Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:mappers/*Mapper.xml");
-        sessionFactory.setMapperLocations(res);
-
-        return sessionFactory.getObject();
-    }
+	@Bean
+	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+		
+		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+		sessionFactory.setDataSource(dataSource);
+		
+		Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:mappers/*Mapper.xml");
+		sessionFactory.setMapperLocations(res);
+		
+		
+		return sessionFactory.getObject();
+	}
+   
 }
