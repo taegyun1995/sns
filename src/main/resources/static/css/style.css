@@ -1,1 +1,90 @@
 @charset "UTF-8";
+
+#wrap {
+	width : 1200px;
+	margin : auto;
+}
+
+header {
+	width : 300px;
+	height : 100px;
+	color : rgb(88, 130, 194);
+}
+
+nav {
+	width : 900px;
+}
+
+nav > #search {
+	width : 400px;
+}
+
+nav > #menu {
+	width : 500px;
+}
+
+.loginword {
+	color : rgb(88, 130, 194);
+}
+
+section > #left-content {
+	width : 800px;
+}
+
+section > .story-content {
+	height :400px;
+}
+
+.content-like {
+	width : 300px;
+}
+
+.content-switch {
+	width : 500px;
+}
+
+.content {
+	height : 100px;
+}
+
+.comment-look {
+	width : 300px;
+}
+
+#loginsection {
+	height : 600px;
+}
+
+section > .login {
+	width : 400px;
+	font-size : 50px;
+	color : rgb(88, 130, 194);
+}
+
+section > .loginId {
+	font-size : 40px;
+	color : rgb(88, 130, 194);
+}
+
+section > .loginPw {
+	font-size : 40px;
+	color : rgb(88, 130, 194);
+}
+
+section > .inform {
+	height : 40px;
+}
+
+.friend {
+	font-size : 15px;
+}
+
+
+.loginbtn {
+	height : 40px;
+	background-color : rgb(88, 130, 194);
+}
+
+footer {
+	height : 50px;
+}
