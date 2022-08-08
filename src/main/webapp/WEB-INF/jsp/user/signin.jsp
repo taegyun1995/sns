@@ -21,26 +21,26 @@
 		<hr>
 		
 		<section class="loginword">
-			<form id="loginForm">
-				<section class="d-flex justify-content-center">
-					<section class="col-4">
-						<h1 class="text-center pt-5"> 로그인 </h1>
+			<form id="loginForm" class="d-flex justify-content-center ">
+					<div class="logincontent border">
+						<h1 class="signinword text-center pt-5"> 로그인 </h1>
 						
-						<h3 class="pt-5 pb-2"> 아이디 </h3>
-						<input type="text" class="inform form-control" id="idInput" placeholder="아이디" />
+						<h3 class="signinword pt-5 pl-3"> 아이디 </h3>
+						<input type="text" class="inform form-control ml-3 col-10" id="idInput" placeholder="아이디" />
 						
-						<h3 class="pt-5 pb-2"> 비밀번호 </h3>
-						<input type="password" class="inform form-control mb-5" id="pwInput" placeholder="비밀번호" />
+						<h3 class="signinword pt-5 pl-3"> 비밀번호 </h3>
+						<input type="password" class="inform form-control ml-3 mb-5 col-10" id="pwInput" placeholder="비밀번호" />
 						
-						<button type="submit" class="userlogin btn btn-info form-control" id="signinBtn" > 로그인 </button>
+						<div class="d-flex justify-content-center pt-2">
+						<button type="submit" class="userlogin btn btn-info form-control col-10" id="signinBtn" > 로그인 </button>
+						</div>
 						
 						<div class="d-flex justify-content-center pt-2 pb-5">
 							<div> 계정이 없으신가요? </div>
 							<a href="/user/signup/view" target="_blank" class="pl-2"> 회원가입 </a>
 						</div>
 										
-					</section>
-				</section>
+					</div>
 			</form>
 		</section>
 		

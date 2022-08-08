@@ -15,16 +15,24 @@ nav {
 	width : 900px;
 }
 
-nav > #search {
-	width : 400px;
+#signupBtn {
+	background-color : rgb(88, 130, 194);
 }
 
-nav > #menu {
-	width : 500px;
+#signinBtn {
+	background-color : rgb(88, 130, 194);
 }
 
-.loginword {
+.signinword {
 	color : rgb(88, 130, 194);
+}
+
+.sportgram {
+	color : rgb(88, 130, 194);
+}
+
+.button {
+	background-color : rgb(88, 130, 194);
 }
 
 section > #left-content {
@@ -55,8 +63,11 @@ section > .story-content {
 	height : 600px;
 }
 
-section > .login {
+.logincontent {
 	width : 400px;
+}
+
+section > .login {
 	font-size : 50px;
 	color : rgb(88, 130, 194);
 }
@@ -72,6 +83,7 @@ section > .loginPw {
 }
 
 section > .inform {
+	width : 400px;
 	height : 40px;
 }
 

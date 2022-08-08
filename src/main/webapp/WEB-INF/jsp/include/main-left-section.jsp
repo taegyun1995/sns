@@ -27,17 +27,10 @@
 					</div>
 					
 					<div class="content-switch d-flex justify-content-end align-items-center">
-						<div>
-							<a href="#">
-								<img width="30" src="/static/img/message.png" />
-							</a>
-						</div>
 						<button class="btn ml-2"> ⬅︎ </button>
 						<button class="btn ml-2"> ➡︎ </button>
 					</div>
 				</div>
-					
-				<div class="d-flex pb-1"> user_name </div>
 				
 				<div class="content pb-1"> user_post_content </div>
 				

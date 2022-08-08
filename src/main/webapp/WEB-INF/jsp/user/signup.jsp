@@ -21,27 +21,30 @@
 		<hr>
 		
 		<section class="d-flex justify-content-center">
-			<section class="col-4">
+			<section class="col-4 border">
+			
+				<h1 class="sportgram text-center pt-3"> SportGram </h1>
 			
 				<div class="text-center">
-					<div class="pt-5"> 운동하는 사람들의 사진과 동영상을 공유하고 </div>
+					<div class="pt-4"> 운동하는 사람들의 사진과 동영상을 공유하고 </div>
 					<div> 싶은 분들은 가입하세요 </div>
 				</div>
 				
-				<input type="text" class="inform form-control mt-4" id="loginId" placeholder="아이디" />
-				<input type="password" class="inform form-control mt-3" id="password" placeholder="비밀번호" />
-				<input type="password" class="inform form-control mt-3" id="passwordconfirm" placeholder="비밀번호 확인" />
-				<input type="text" class="inform form-control mt-3" id="name" placeholder="이름" />
-				<input type="text" class="inform form-control mt-3" id="phoneNum" placeholder="연락처" />
+				<input type="text" class="inform form-control col-12 mt-4" id="loginId" placeholder="아이디" />
+				<input type="password" class="inform form-control col-12 mt-3" id="password" placeholder="비밀번호" />
+				<input type="password" class="inform form-control col-12 mt-3" id="passwordconfirm" placeholder="비밀번호 확인" />
+				<input type="text" class="inform form-control col-12 mt-3" id="name" placeholder="이름" />
+				<input type="text" class="inform form-control col-12 mt-3" id="phoneNum" placeholder="연락처" />
 				
-				<button type="button" class="useradd btn btn-info form-control mt-5" id="signupBtn"> 회원가입 </button>
+				<button type="button" class="btn btn-info form-control mt-3" id="signupBtn"> 회원가입 </button>
 				
 				<div class="d-flex justify-content-center pt-2 pb-5">
 					<div> 계정이 있으신가요? </div>
-					<a href="/sportgram/user/signin/view" target="_blank" class="pl-2"> 로그인 </a>
+					<a href="/user/signin/view" target="_blank" class="pl-2"> 로그인 </a>
 				</div>
 				
 			</section>
+			
 		</section>
 		
 		<hr>
