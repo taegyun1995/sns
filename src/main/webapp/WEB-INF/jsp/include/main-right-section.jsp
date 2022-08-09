@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-			<section class="pl-4 pr-4 pt-2 pb-4">
+			<section class="p-4">
 			
 				<div class="d-flex align-items-center">
 					<div>

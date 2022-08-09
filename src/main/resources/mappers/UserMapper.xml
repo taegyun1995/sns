@@ -29,6 +29,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		)			
 	</insert>
 	
+	<select id="selectCountLoginId" parameterType="string" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			`user`
+		WHERE
+			`loginId` = #{loginId}
+	
+	</select>
+	
 	<select id="selectUser" resultType="com.project.sns.user.model.User" parameterType="map">
 		SELECT
 			`id`

@@ -13,25 +13,40 @@ header {
 
 nav {
 	width : 900px;
+	height : 100px;
 }
 
-#signupBtn {
+section > .sportgram {
+	color : rgb(88, 130, 194);
+}
+
+section > .inform {
+	width : 400px;
+	height : 40px;
+}
+
+section > #signupBtn {
 	background-color : rgb(88, 130, 194);
 }
 
-#signinBtn {
+#duplicateBtn{
+	color : white;
 	background-color : rgb(88, 130, 194);
+}
+
+.overlaptext {
+	font-size : 13px;
+}
+
+.logincontent {
+	width : 400px;
 }
 
 .signinword {
 	color : rgb(88, 130, 194);
 }
 
-.sportgram {
-	color : rgb(88, 130, 194);
-}
-
-.button {
+#signinBtn {
 	background-color : rgb(88, 130, 194);
 }
 
@@ -51,6 +66,7 @@ section > .story-content {
 	width : 500px;
 }
 
+
 .content {
 	height : 100px;
 }
@@ -59,42 +75,8 @@ section > .story-content {
 	width : 300px;
 }
 
-#loginsection {
-	height : 600px;
-}
-
-.logincontent {
-	width : 400px;
-}
-
-section > .login {
-	font-size : 50px;
-	color : rgb(88, 130, 194);
-}
-
-section > .loginId {
-	font-size : 40px;
-	color : rgb(88, 130, 194);
-}
-
-section > .loginPw {
-	font-size : 40px;
-	color : rgb(88, 130, 194);
-}
-
-section > .inform {
-	width : 400px;
-	height : 40px;
-}
-
 .friend {
 	font-size : 15px;
-}
-
-
-.loginbtn {
-	height : 40px;
-	background-color : rgb(88, 130, 194);
 }
 
 footer {

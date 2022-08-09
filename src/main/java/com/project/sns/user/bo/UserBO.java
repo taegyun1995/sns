@@ -14,14 +14,26 @@ public class UserBO {
 	private UserDAO userDAO;
 	
 	public int addUser(String loginId, String password, String name, String phoneNum) {
-		
 		String encryptPassword = EncryptUtils.md5(password);
 		
 		return userDAO.insertUser(loginId, encryptPassword, name, phoneNum);
 	}
 	
-	public User getUser(String loginId, String password) {
+	// 아이디를 전달받고 중복 여부를 알려주는 메서드
+	public boolean isDuplicate(String loginId) {
+		// 일치하는 LoginId 개수 전달받고,
+		// 0일 경우 불일치
+		// 그게 아닐경우 중복
+		int count = userDAO.selectCountLoginId(loginId);
 		
+		if(count == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public User getUser(String loginId, String password) {
 		String encryptPassword = EncryptUtils.md5(password);
 		
 		return userDAO.selectUser(loginId, encryptPassword);

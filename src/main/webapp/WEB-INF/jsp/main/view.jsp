@@ -15,7 +15,7 @@
 </head>
 <body>
 	
-	<div id="wrap">
+	<div id="wrap" class="border">
 		
 		<div class="d-flex">
 			<c:import url="/WEB-INF/jsp/include/header.jsp" />

@@ -3,13 +3,6 @@
     
 			<section id="left-content" class="pl-4 pr-4 pt-2 pb-4">
 			
-				<div class="d-flex align-items-center border border-info rounded p-2">	
-					<div class="pr-2"> <img width="80" src="/static/img/me.png" /> </div>
-					<div class="pr-2"> <img width="80" src="/static/img/me.png" /> </div>
-					<div class="pr-2"> <img width="80" src="/static/img/me.png" /> </div>
-					<div class="pr-2"> <img width="80" src="/static/img/me.png" /> </div>
-				</div>
-					
 				<div class="d-flex align-items-center border border-info rounded mt-3">
 					<div class="p-2"> <img width="70" src="/static/img/me.png" /> </div>
 					<div class="p-2"> user_name </div>
@@ -32,7 +25,7 @@
 					</div>
 				</div>
 				
-				<div class="content pb-1"> user_post_content </div>
+				<div class="content border mb-2"> user_post_content </div>
 				
 				<div class="border border-info rounded"> user_commet ORDER BY `updatedAt` DESC LIMIT 3 </div>
 					

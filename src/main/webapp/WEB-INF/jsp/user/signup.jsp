@@ -30,7 +30,12 @@
 					<div> 싶은 분들은 가입하세요 </div>
 				</div>
 				
-				<input type="text" class="inform form-control col-12 mt-4" id="loginId" placeholder="아이디" />
+				<div class="d-flex mt-3">
+					<input type="text" class="inform form-control col-10" id="loginId" placeholder="아이디" />
+					<button class="btn btn-sm p-1" id="duplicateBtn"> 중복확인 </button>
+				</div>
+					<div class="overlaptext text-danger pl-1 d-none"> 아이디가 중복되었습니다. </div>
+				
 				<input type="password" class="inform form-control col-12 mt-3" id="password" placeholder="비밀번호" />
 				<input type="password" class="inform form-control col-12 mt-3" id="passwordconfirm" placeholder="비밀번호 확인" />
 				<input type="text" class="inform form-control col-12 mt-3" id="name" placeholder="이름" />
@@ -55,6 +60,33 @@
 	<script>
 		
 		$(document).ready(function(){
+			
+			$("#duplicateBtn").on("click", function(){
+				let id = $("#loginId").val();
+				
+				if(id == "") {
+					alert("아이디를 입력하세요.");
+					return;
+				}
+				
+				$.ajax({
+					type:"get",
+					url:"/user/duplicate_id",
+					data:{"loginId":id},
+					
+					success:function(data) {
+						if(data.is_duplicate) {
+							$(".overlaptext").removeClass("d-none");
+						} else {
+							$(".overlaptext").addClass("d-none");
+						}
+					},
+					error:function() {
+						alert("중복확인 에러");
+					}
+				});
+				
+			});
 			
 			$("#signupBtn").on("click", function(){
 				
@@ -96,7 +128,7 @@
 					
 					success:function(data) {
 						if(data.result == "success") {
-							location.href="/sportgram/user/signin/view";
+							location.href="/user/signin/view";
 						} else {
 							alert("회원가입 실패");
 						}
