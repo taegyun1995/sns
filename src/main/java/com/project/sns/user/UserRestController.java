@@ -21,9 +21,9 @@ public class UserRestController {
 	@Autowired
 	private UserBO userBO;
 	
-	// 회원가입 API
+	/// 회원가입 api
 	@PostMapping("/user/signup")
-	public Map<String, String> signup(
+	public Map<String, String> singUp(
 			@RequestParam("loginId") String loginId
 			, @RequestParam("password") String password
 			, @RequestParam("name") String name
@@ -31,58 +31,60 @@ public class UserRestController {
 		
 		int count = userBO.addUser(loginId, password, name, phoneNum);
 		
-		Map<String, String> result = new HashMap<>();
+		Map<String, String> map = new HashMap<>();
 		
 		if(count == 1) {
-			result.put("result", "success");
+			map.put("result", "success");
 		} else {
-			result.put("result", "fail");
+			map.put("result", "fail");
 		}
 		
-		return result;
+		return map;
 		
 	}
 	
-	// 아이디 중복 확인 API
+	// 아이디 중복 확인 api
 	@GetMapping("/user/duplicate_id")
 	public Map<String, Boolean> isDuplicate(String loginId) {
 		Map<String, Boolean> result = new HashMap<>();
 		
-		if(userBO.isDuplicate(loginId)) { // 중복된 경우
+		if(userBO.isDuplicate(loginId)) { // 중복된경우
 			result.put("is_duplicate", true);
-		} else { // 중복되지 않은 경우
-			result.put("is_duplicate", false);
+		} else { // 중복되지 않은 경우 
+			result.put("is_duplicate", false);			
 		}
 		
 		return result;
+		
 	}
 	
 	// 로그인 API
 	@PostMapping("/user/signin")
-	public Map<String, String> signin(
+	public Map<String, String> signIn(
 			@RequestParam("loginId") String loginId
 			, @RequestParam("password") String password
 			, HttpServletRequest request) {
 		
 		User user = userBO.getUser(loginId, password);
 		
-		Map<String, String> map = new HashMap<>();
+		Map<String, String> result = new HashMap<>();
 		
-		if(user != null) {
-			map.put("result", "success");
+		if(user != null) { // 로그인 성공
+			result.put("result", "success");
 			
 			HttpSession session = request.getSession();
-			// userId, loginId, name
+			// user id, user loginId
 			session.setAttribute("userId", user.getId());
-			session.setAttribute("userLoginId",  user.getLoginId());
 			session.setAttribute("userName", user.getName());
+			session.setAttribute("userLoginId", user.getLoginId());
 			
-		} else {
-			map.put("result", "fail");
+		} else { // 로그인 실패
+			result.put("result", "fail");
+			
 		}
 		
-		return map;
+		return result;
+		
 	}
-	
 
 }

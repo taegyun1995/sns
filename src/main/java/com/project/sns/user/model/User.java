@@ -11,6 +11,7 @@ public class User {
 	private String phoneNum;
 	private Date createdAt;
 	private Date updatedAt;
+	
 	public int getId() {
 		return id;
 	}

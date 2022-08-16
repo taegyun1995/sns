@@ -6,77 +6,15 @@
 }
 
 header {
-	width : 300px;
-	height : 100px;
-	color : rgb(88, 130, 194);
+	height : 50px;
 }
 
-nav {
-	width : 900px;
-	height : 100px;
-}
-
-section > .sportgram {
-	color : rgb(88, 130, 194);
-}
-
-section > .inform {
-	width : 400px;
-	height : 40px;
-}
-
-section > #signupBtn {
-	background-color : rgb(88, 130, 194);
-}
-
-#duplicateBtn{
-	color : white;
-	background-color : rgb(88, 130, 194);
-}
-
-.overlaptext {
-	font-size : 13px;
-}
-
-.logincontent {
+.signupContent {
 	width : 400px;
 }
-
-.signinword {
-	color : rgb(88, 130, 194);
-}
-
-#signinBtn {
-	background-color : rgb(88, 130, 194);
-}
-
-section > #left-content {
-	width : 800px;
-}
-
-section > .story-content {
-	height :400px;
-}
-
-.content-like {
-	width : 300px;
-}
-
-.content-switch {
-	width : 500px;
-}
-
 
 .content {
-	height : 100px;
-}
-
-.comment-look {
-	width : 300px;
-}
-
-.friend {
-	font-size : 15px;
+	width : 600px;
 }
 
 footer {

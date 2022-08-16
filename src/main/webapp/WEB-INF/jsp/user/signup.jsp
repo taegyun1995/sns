@@ -18,41 +18,43 @@
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
-		<hr>
+		<section class="d-flex justify-content-center my-5">
 		
-		<section class="d-flex justify-content-center">
-			<section class="col-4 border">
+			<div>
 			
-				<h1 class="sportgram text-center pt-3"> SportGram </h1>
-			
-				<div class="text-center">
-					<div class="pt-4"> 운동하는 사람들의 사진과 동영상을 공유하고 </div>
-					<div> 싶은 분들은 가입하세요 </div>
+				<div class="signupContent d-flex justify-content-center align-items-start border rounded">
+				
+					<div class="w-100 p-5">
+						<h2 class="text-center"> SportGram </h2>
+						<br>
+						<div class="text-center"> 운동하는 사람들의 사진과 동영상을 <br> 공유하고싶은 분들은 가입하세요 </div>
+						
+						<div class="d-flex mt-3">
+							<input type="text" class="form-control" placeholder="아이디"  id="loginIdInput" />
+							<button class="btn btn-info btn-sm ml-2" id="duplicateBtn"> 중복확인 </button>
+						</div>
+						
+						<div id="overlapText" class="text-danger d-none"> <small> 중복된 id입니다. </small> </div>
+						<div id="possibleText" class="text-success d-none"> <small> 사용가능한 아이디 입니다. </small> </div>
+						<input type="password" class="form-control mt-3" id="passwordInput" placeholder="비밀번호" />
+						<input type="password" class="form-control mt-3" id="passwordConfirmInput" placeholder="비밀번호 확인" />
+						<input type="text" class="form-control mt-3" id="nameInput" placeholder="이름" />
+						<input type="text" class="form-control mt-3" id="phoneNumInput" placeholder="연락처" />
+						
+						<button type="button" class="btn btn-info btn-block mt-3" id="signupBtn"> 회원가입 </button>
+						
+						<div class="d-flex justify-content-center mt-4 p-3">
+							<div> 계정이 있으신가요? </div>
+							<a href="/user/signin/view" target="_blank" class="pl-2"> 로그인 </a>
+						</div>
+						
+					</div>
+					
 				</div>
 				
-				<div class="d-flex mt-3">
-					<input type="text" class="inform form-control col-10" id="loginId" placeholder="아이디" />
-					<button class="btn btn-sm p-1" id="duplicateBtn"> 중복확인 </button>
-				</div>
-					<div class="overlaptext text-danger pl-1 d-none"> 아이디가 중복되었습니다. </div>
-				
-				<input type="password" class="inform form-control col-12 mt-3" id="password" placeholder="비밀번호" />
-				<input type="password" class="inform form-control col-12 mt-3" id="passwordconfirm" placeholder="비밀번호 확인" />
-				<input type="text" class="inform form-control col-12 mt-3" id="name" placeholder="이름" />
-				<input type="text" class="inform form-control col-12 mt-3" id="phoneNum" placeholder="연락처" />
-				
-				<button type="button" class="btn btn-info form-control mt-3" id="signupBtn"> 회원가입 </button>
-				
-				<div class="d-flex justify-content-center pt-2 pb-5">
-					<div> 계정이 있으신가요? </div>
-					<a href="/user/signin/view" target="_blank" class="pl-2"> 로그인 </a>
-				</div>
-				
-			</section>
+			</div>
 			
 		</section>
-		
-		<hr>
 		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</div>
@@ -61,10 +63,20 @@
 		
 		$(document).ready(function(){
 			
+			var isDuplicateCheck = false;
+			var isDuplicateId = true;
+			
+			$("#loginIdInput").on("input", function() {
+				isDuplicateCheck = false;
+				isDuplicateId = true;
+				$("#possibleText").addClass("d-none");
+				$("#overlapText").addClass("d-none");
+			});
+			
 			$("#duplicateBtn").on("click", function(){
-				let id = $("#loginId").val();
+				let loginId = $("#loginIdInput").val();
 				
-				if(id == "") {
+				if(loginId == "") {
 					alert("아이디를 입력하세요.");
 					return;
 				}
@@ -72,13 +84,20 @@
 				$.ajax({
 					type:"get",
 					url:"/user/duplicate_id",
-					data:{"loginId":id},
+					data:{"loginId":loginId},
 					
 					success:function(data) {
+						
+						isDuplicateCheck = true;
+						
 						if(data.is_duplicate) {
-							$(".overlaptext").removeClass("d-none");
+							$("#overlapText").removeClass("d-none");
+							$("#possibleText").addClass("d-none");
+							isDuplicateId = true;
 						} else {
-							$(".overlaptext").addClass("d-none");
+							$("#possibleText").removeClass("d-none");
+							$("#overlapText").addClass("d-none");
+							isDuplicateId = false;
 						}
 					},
 					error:function() {
@@ -90,23 +109,37 @@
 			
 			$("#signupBtn").on("click", function(){
 				
-				let id = $("#loginId").val();
-				let pw = $("#password").val();
-				let pw2 = $("#passwordconfirm").val();
-				let name= $("#name").val();
-				let phoneNum = $("#phoneNum").val();
+				let loginId = $("#loginIdInput").val();
+				let password = $("#passwordInput").val();
+				let passwordConfirm = $("#passwordConfirmInput").val();
+				let name= $("#nameInput").val();
+				let phoneNum = $("#phoneNumInput").val();
 				
-				if(id == "") {
+				if(loginId == "") {
 					alert("아이디를 입력하세요.");
 					return;
 				}
 				
-				if(pw == "") {
+				// 중복체크 여부 유효성 검사 
+				// if(isDuplicateCheck == false) {
+				if(!isDuplicateCheck) {
+					alert("중복여부 체크를 진행해주세요");
+					return ;
+				}
+				
+				// 아이디 중복여부 유효성 검사 
+				// if(isDuplicateId == true) {
+				if(isDuplicateId) {
+					alert("중복된 아이디입니다");
+					return ;
+				}
+				
+				if(password == "") {
 					alert("비밀번호를 입력하세요.");
 					return;
 				}
 				
-				if(pw != pw2) {
+				if(password != passwordConfirm) {
 					alert("비밀번호가 일치하지 않습니다.")
 					return;
 				}
@@ -124,7 +157,7 @@
 				$.ajax({
 					type:"post",
 					url:"/user/signup",
-					data:{"loginId":id, "password":pw, "name":name, "phoneNum":phoneNum},
+					data:{"loginId":loginId, "password":password, "name":name, "phoneNum":phoneNum},
 					
 					success:function(data) {
 						if(data.result == "success") {

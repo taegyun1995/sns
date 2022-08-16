@@ -1,60 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE mapper 
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="com.project.sns.user.dao.UserDAO">
-
-	<insert id="insertUser" parameterType="map">
-		INSERT INTO
-			`user`
- 		(
- 			`loginId`
- 			, `password`
- 			, `name`
- 			, `phoneNum`
- 			, `createdAt`
- 			, `updatedAt`
- 		
- 		)
- 		VALUES
- 		(
- 			#{loginId}
- 			, #{password}
- 			, #{name}
- 			, #{phoneNum}
- 			, now()
- 			, now()
- 		)			
-	</insert>
-	
-	<select id="selectCountLoginId" parameterType="string" resultType="int">
-		SELECT
-			count(1)
-		FROM
-			`user`
-		WHERE
-			`loginId` = #{loginId}
-	
-	</select>
-	
-	<select id="selectUser" resultType="com.project.sns.user.model.User" parameterType="map">
-		SELECT
-			`id`
-			, `loginId`
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ 
+ <mapper namespace="com.project.sns.user.dao.UserDAO">
+ 	
+ 	<insert id="insertUser" parameterType="map">
+ 		INSERT INTO 
+ 			`user`
+		(
+			`loginId`
 			, `password`
 			, `name`
 			, `phoneNum`
 			, `createdAt`
 			, `updatedAt`
-		FROM
+		)
+		VALUES
+		(
+			#{loginId}
+			, #{password}
+			, #{name}
+			, #{phoneNum}
+			, now()
+			, now()
+		)
+ 	</insert>
+ 	
+ 	<select id="selectCountLoginId" parameterType="string" resultType="int">
+ 		SELECT
+ 			count(1)
+		FROM 
 			`user`
 		WHERE
-			`loginId` = #{loginId} AND `password` = #{password}
-	
-	</select>
-
-
-
-</mapper>
+			`loginId` = #{loginId}
+ 	</select>
+ 	
+ 	<select id="selectUser" parameterType="map" resultType="com.project.sns.user.model.User">
+ 		SELECT 
+ 			`id`
+ 			, `loginId`
+			, `password`
+			, `name`
+			, `phoneNum`
+			, `createdAt`
+			, `updatedAt`
+ 		FROM 
+ 			`user`
+		WHERE
+			`loginId` = #{loginId}
+			AND `password` = #{password}
+ 	</select>
+ 	
+ 	
+ 	<select id="selectUserById" parameterType="int" resultType="com.project.sns.user.model.User">
+ 		SELECT 
+ 			`id`
+ 			, `loginId`
+			, `password`
+			, `name`
+			, `phoneNum`
+			, `createdAt`
+			, `updatedAt`
+ 		FROM 
+ 			`user`
+		WHERE
+			`id` = #{id}
+ 	</select>
+ 
+ 
+ </mapper>

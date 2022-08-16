@@ -18,35 +18,33 @@
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
-		<hr>
-		
-		<section>
-			<form id="loginForm" class="d-flex justify-content-center ">
-				<div class="logincontent border">
-					<h1 class="signinword text-center pt-5"> 로그인 </h1>
-					
-					<h3 class="signinword pt-5 pl-3"> 아이디 </h3>
-					<input type="text" class="inform form-control ml-3 col-10" id="idInput" placeholder="아이디" />
-					
-					<h3 class="signinword pt-5 pl-3"> 비밀번호 </h3>
-					<input type="password" class="inform form-control ml-3 mb-5 col-10" id="pwInput" placeholder="비밀번호" />
-					
-					<div class="d-flex justify-content-center pt-2">
-					<button type="submit" class="userlogin btn btn-info form-control col-10" id="signinBtn" > 로그인 </button>
-					</div>
-					
-					<div class="d-flex justify-content-center pt-2 pb-5">
-						<div> 계정이 없으신가요? </div>
-						<a href="/user/signup/view" target="_blank" class="pl-2"> 회원가입 </a>
-					</div>
-									
+		<section class="d-flex justify-content-center my-5">
+			<div class="d-flex align-items-center mr-5">
+				<img src="/static/img/sport.png" width="400" height ="350" />
+			</div>
+			
+			<div>
+				<div class="border rounded">
+					<div class="w-100 p-5">
+						<h2 class="text-center"> 로그인 </h2>
+						<br>
+						
+						<form id="loginForm">
+							<input type="text" class="inform form-control mt-3" placeholder="아이디" id="loginIdInput" />
+							<input type="password" class="inform form-control mt-3" placeholder="비밀번호" id="passwordInput" />
+							
+							<button type="submit" class="btn btn-info btn-block mt-4"> 로그인 </button>
+							<hr>
+						</form>
+						
+						<div class="d-flex justify-content-center">
+							<div> 계정이 없으신가요? </div>
+							<a href="/user/signup/view" target="_blank" class="pl-2"> 회원가입 </a>
+						</div>
+					</div>	
 				</div>
-			</form>
+			</div>
 		</section>
-		
-		
-		
-		<hr>
 		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</div>
@@ -55,18 +53,19 @@
 		$(document).ready(function(){
 			
 			$("#loginForm").on("submit", function(e){
+				// 해당 이벤트가 가지고 있는 기능을 비활성화
 				
 				e.preventDefault();
 				
-				let id = $("#idInput").val();
-				let pw = $("#pwInput").val();
+				let loginId = $("#loginIdInput").val();
+				let password = $("#passwordInput").val();
 				
-				if(id == "") {
+				if(loginId == "") {
 					alert("아이디를 입력하세요.")
 					return;
 				}
 				
-				if(pw == "") {
+				if(password == "") {
 					alert("비밀번호를 입력하세요.")
 					return;
 				}
@@ -74,11 +73,11 @@
 				$.ajax({
 					type:"post",
 					url:"/user/signin",
-					data:{"loginId":id, "password":pw},
+					data:{"loginId":loginId, "password":password},
 					
 					success:function(data){
 						if(data.result == "success") {
-							location.href="/sportgram/main/view";
+							location.href="/post/main/view";
 						} else {
 							alert("아이디 / 비밀번호를 확인해주세요.");
 						}
