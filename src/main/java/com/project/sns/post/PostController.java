@@ -16,7 +16,7 @@ public class PostController {
 	private PostBO postBO;
 	
 	@GetMapping("/post/main/view")
-	public String timelineView(Model model) {
+	public String mainView(Model model) {
 		List<PostDetail> postDetailList = postBO.getPostList();
 		model.addAttribute("postList", postDetailList);
 		// 데이터 조회해서 model 객체에 값을 저장한다. 

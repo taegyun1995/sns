@@ -17,10 +17,11 @@
 <body>
 	
 	<div id="wrap" class="col-7">
-		
+	
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
+		<hr>
 		
-		<section class="d-flex justify-content-center p-5">
+		<section class="d-flex justify-content-center px-5">
 		
 			<div class="py-5">
 			
@@ -28,15 +29,18 @@
 				
 					<div class="input-box border rounded">
 						<textarea class="form-control border-0" rows="5" id="contentInput"> </textarea>
-						<div class="d-flex mt-2 justify-content-between border-top">
-							<input type="file" class="btn"/>
+						
+						<div class="d-flex justify-content-between mt-2">
+							<a href="#" id="imageIcon"> <i class="bi bi-image"></i> </a>
+							<input type="file" class="btn d-none" id="fileInput">
 							<button type="button" class="btn btn-info m-1" id="uploadBtn"> 업로드</button>
 						</div>
 					</div>
 					
 					<div class="mt-4">
+					
 						<c:forEach var="postDetail" items="${postList }" >
-							<div>
+							<div class="border px-2 my-3">
 							
 								<div class="d-flex justify-content-between p-2">
 									<div> ${postDetail.user.name } </div>
@@ -44,7 +48,7 @@
 								</div>
 								
 								<div>
-									<div> <img src="/static/img/audience.png" class="w-100" /> </div>
+									<div> <img src="${postDetail.post.imagePath }" class="w-100" /> </div>
 								</div>
 								
 	
@@ -69,7 +73,7 @@
 										<input type="text" class="form-control">	
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="inputGroup-sizing-sm">
-												<button type="button" class="btn"> 작성 </button>
+												<button type="button" class="btn btn-info"> 작성 </button>
 											</span>
 										</div>
 									</div>
@@ -78,6 +82,7 @@
 								
 							</div>
 						</c:forEach>
+						
 					</div>
 					
 				</div>
@@ -93,7 +98,14 @@
 	<script>
 		$(document).ready(function(){
 			
-			$("#uploadBtn").on("click", function() {
+			$("#imageIcon").on("click", function(e) {
+				// fileInput을 클릭한 효과를 만들어야 한다.
+				e.preventDefault();
+				$("#fileInput").click();
+			});
+			
+			$("#uploadBtn").on("click", function(e) {
+				e.preventDefault();
 				let content = $("#contentInput").val().trim();
 				
 				if(content == "") {
@@ -101,10 +113,25 @@
 					return;
 				}
 				
+				// 파일 선택 유효성 검사
+				// $("#fileInput")[0].files[0]
+				if($("#fileInput")[0].files.length == 0) {
+					alert("이미지를 선택하세요.");
+					return;
+				}
+				
+				var formData = new FormData();
+				formData.append("content", content);
+				formData.append("file", $("#fileInput")[0].files[0]);
+				
 				$.ajax({
 					type:"post",
 					url:"/post/create",
-					data:{"content":content},
+					data:formData,
+					enctype:"multipart/form-data",
+					processData:false,
+					contentType:false,
+					
 					success:function(data) {
 						if(data.result == "success") {
 							location.reload();

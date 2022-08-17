@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.sns.post.bo.PostBO;
 
@@ -22,6 +23,7 @@ public class PostRestController {
 	@PostMapping("/post/create")
 	public Map<String, String> createPost(
 			@RequestParam("content") String content
+			, @RequestParam(value="file", required=false) MultipartFile file
 			, HttpServletRequest request) {
 		
 		// 글쓴 사람 정보를 같이 저장하기 위해서 
@@ -29,7 +31,7 @@ public class PostRestController {
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		
-		int count = postBO.addPost(userId, content);
+		int count = postBO.addPost(userId, content, file);
 		
 		Map<String, String> result = new HashMap<>();
 		if(count == 1) {
@@ -39,6 +41,6 @@ public class PostRestController {
 		}
 		
 		return result;
-		
 	}
+	
 }

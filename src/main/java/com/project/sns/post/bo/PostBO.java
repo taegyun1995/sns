@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.project.sns.common.FileManagerService;
 import com.project.sns.post.dao.PostDAO;
 import com.project.sns.post.model.Post;
 import com.project.sns.post.model.PostDetail;
@@ -22,8 +24,10 @@ public class PostBO {
 	private UserBO userBO;
 	
 	
-	public int addPost(int userId, String content) {
-		return postDAO.insertPost(userId, content, "");
+	public int addPost(int userId, String content, MultipartFile file) {
+		String imagePath = FileManagerService.saveFile(userId, file);
+		
+		return postDAO.insertPost(userId, content, imagePath);
 	}
 	
 	public List<PostDetail> getPostList() {
@@ -49,5 +53,5 @@ public class PostBO {
 		
 		return postDetailList;
 	}
-
+	
 }
