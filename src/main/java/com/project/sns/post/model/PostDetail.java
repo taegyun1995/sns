@@ -1,5 +1,6 @@
 package com.project.sns.post.model;
 
+import com.project.sns.post.comment.model.Comment;
 import com.project.sns.user.model.User;
 
 public class PostDetail {
@@ -8,7 +9,22 @@ public class PostDetail {
 	// Post 정보
 	private Post post;
 	
+	private int likeCount;
 	
+	private Comment comment;
+	
+	public Comment getComment() {
+		return comment;
+	}
+	public void setComment(Comment comment) {
+		this.comment = comment;
+	}
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
 	public User getUser() {
 		return user;
 	}
@@ -21,5 +37,7 @@ public class PostDetail {
 	public void setPost(Post post) {
 		this.post = post;
 	}
+	
+	
 
 }

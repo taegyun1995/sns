@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>메인화면</title>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>        
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -13,6 +14,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+
 </head>
 <body>
 	
@@ -38,8 +40,7 @@
 					</div>
 					
 					<div class="mt-4">
-					
-						<c:forEach var="postDetail" items="${postList }" >
+						<c:forEach var="postDetail" items="${postList }" varStatus="status">
 							<div class="border px-2 my-3">
 							
 								<div class="d-flex justify-content-between p-2">
@@ -53,8 +54,10 @@
 								
 	
 								<div class="d-flex p-2">
-									<div class="heart-size"> <i class="bi bi-heart"> </i> </div>
-									<div class="ml-1"> n개 </div>
+									<a href="#" class="like-btn" data-post-id="${postDetail.post.id}">
+										<span class="heart-size"> <i class="bi bi-heart"> </i> </span>
+									</a>
+									<span class="ml-1"> 좋아요 ${postDetail.likeCount}개</span>
 								</div>
 		
 								<div class="p-2">
@@ -70,19 +73,17 @@
 									</div>
 									
 									<div class="input-group input-group-sm mt-2">
-										<input type="text" class="form-control">	
+										<input type="text" class="form-control" id="commentInput${postDetail.post.id }">	
 										<div class="input-group-prepend">
-											<span class="input-group-text" id="inputGroup-sizing-sm">
-												<button type="button" class="btn btn-info"> 작성 </button>
+											<span class="input-group-text">
+												<button type="button" class="btn btn-success comment-btn" data-post-id="${postDetail.post.id }" > 작성 </button>
 											</span>
 										</div>
 									</div>
-									
 								</div>
 								
 							</div>
 						</c:forEach>
-						
 					</div>
 					
 				</div>
@@ -97,6 +98,30 @@
 	
 	<script>
 		$(document).ready(function(){
+			
+			$(".like-btn").on("click", function(e) {
+				e.preventDefault();
+				
+				// 현재 클릭된 태그 객체를 얻어와서 postId를 얻어온다.
+				// data-post-id="10"
+				let postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/post/like",
+					data:{"postId":postId},
+					success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("좋아요 실패");
+						}
+					},
+					error:function() {
+						alert("좋아요 에러")
+					}
+				});
+			});
 			
 			$("#imageIcon").on("click", function(e) {
 				// fileInput을 클릭한 효과를 만들어야 한다.
@@ -145,6 +170,33 @@
 					
 				});
 			});
+			
+			$(".comment-btn").on("click", function(){
+				// 이벤트가 일어난 버튼에서 postId를 얻어 온다.
+				let postId = $(this).data("post-id");
+				// 작성한 댓글 가져오기				
+				// #commentInput5
+				let content = $("#commentInput" + postId).val();
+				
+				$.ajax({
+					type:"post",
+					url:"/post/comment/create",
+					data:{"postId":postId, "content":content},
+					success:function(data) {
+						if(data.result == "success"){
+							location.reload();
+						} else {
+							alert("댓글 작성 실패");
+						}
+					},
+					error:function() {
+						alert("댓글 작성 에러");
+					}
+				});		
+				
+			});
+			
+			
 			
 		});
 	
