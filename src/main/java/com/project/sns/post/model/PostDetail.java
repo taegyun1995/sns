@@ -1,6 +1,9 @@
 package com.project.sns.post.model;
 
+import java.util.List;
+
 import com.project.sns.post.comment.model.Comment;
+import com.project.sns.post.comment.model.CommentDetail;
 import com.project.sns.user.model.User;
 
 public class PostDetail {
@@ -11,13 +14,22 @@ public class PostDetail {
 	
 	private int likeCount;
 	
-	private Comment comment;
+	private List<CommentDetail> comment ;
 	
-	public Comment getComment() {
-		return comment;
+	private boolean islike;
+	
+	
+	public boolean islike() {
+		return islike;
 	}
-	public void setComment(Comment comment) {
+	public void setlike(boolean islike) {
+		this.islike = islike;
+	}
+	public void setComment(List<CommentDetail> comment) {
 		this.comment = comment;
+	}
+	public List<CommentDetail> getComment() {
+		return comment;
 	}
 	public int getLikeCount() {
 		return likeCount;

@@ -17,6 +17,11 @@ header {
 	width : 600px;
 }
 
+.heart-size {
+	font-size : 18px;
+	text-decoration:none;
+}
+
 footer {
 	height : 50px;
 }

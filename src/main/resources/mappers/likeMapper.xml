@@ -29,5 +29,15 @@
 		WHERE
 			`postId` = #{postId}
 	</select>
- 
+ 	
+ 	<select id="selectCountLikeByPostUserId" resultType="int" parameterType="map">
+		SELECT
+			count(1)
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
+			AND `userId` = #{userId}
+ 	</select>	
+ 		
  </mapper>

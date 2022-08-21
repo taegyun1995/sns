@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.sns.common.FileManagerService;
 import com.project.sns.post.comment.bo.CommentBO;
-import com.project.sns.post.comment.model.Comment;
+import com.project.sns.post.comment.model.CommentDetail;
 import com.project.sns.post.dao.PostDAO;
 import com.project.sns.post.like.bo.LikeBO;
 import com.project.sns.post.model.Post;
@@ -39,7 +39,7 @@ public class PostBO {
 		return postDAO.insertPost(userId, content, imagePath);
 	}
 	
-	public List<PostDetail> getPostList() {
+	public List<PostDetail> getPostList(int loginUserId) {
 		
 		List<PostDetail> postDetailList = new ArrayList<>();
 		
@@ -54,13 +54,17 @@ public class PostBO {
 			// userBo를 통해서 userId 와 일치하는 사용자 정보 조회
 			User user = userBO.getUserById(userId);
 			int likeCount = likeBO.countLike(postId);
-			List<Comment> comment = commentBO.getComment(postId);
+			List<CommentDetail> commentList = commentBO.getComment(postId);
+			boolean islike = likeBO.isLike(postId, loginUserId);
 			
 			// 게시글과 사용자 정보를 합치는 과정
 			PostDetail postDetail = new PostDetail();
 			postDetail.setPost(post);
 			postDetail.setUser(user);
 			postDetail.setLikeCount(likeCount);
+			postDetail.setComment(commentList);
+			postDetail.setlike(islike);
+			
 			postDetailList.add(postDetail);
 		}
 		

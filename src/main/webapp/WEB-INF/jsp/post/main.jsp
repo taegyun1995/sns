@@ -54,10 +54,19 @@
 								
 	
 								<div class="d-flex p-2">
-									<a href="#" class="like-btn" data-post-id="${postDetail.post.id}">
-										<span class="heart-size"> <i class="bi bi-heart"> </i> </span>
-									</a>
-									<span class="ml-1"> 좋아요 ${postDetail.likeCount}개</span>
+									<c:choose>
+										<c:when test="${postDetail.like }" >
+											<a href="#">
+												<span class="heart-size text-danger"> <i class="bi bi-heart-fill"> </i> </span>
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a href="#" class="like-btn" data-post-id="${postDetail.post.id}">
+												<span class="heart-size"> <i class="bi bi-heart"> </i> </span>
+											</a>
+										</c:otherwise>
+									</c:choose>
+									<div class="ml-1"> 좋아요 ${postDetail.likeCount}개</div>
 								</div>
 		
 								<div class="p-2">
@@ -68,8 +77,9 @@
 									<div class="mb-2 border-bottom"> <small> 댓글 </small> </div>
 									
 									<div class="mt-2">
-										<div> user_commet ORDER BY `updatedAt` DESC LIMIT 3 </div>
-										<div> user_commet2 ORDER BY `updatedAt` DESC LIMIT 3 </div>
+										<c:forEach var="commentDetail" items="${postDetail.comment }" >
+											<div> <b> ${commentDetail.user.name} </b>  ${commentDetail.comment.content } </div>
+										</c:forEach>
 									</div>
 									
 									<div class="input-group input-group-sm mt-2">

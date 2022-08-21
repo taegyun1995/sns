@@ -27,7 +27,8 @@
  	
  	<select id="selectComment" resultType="com.project.sns.post.comment.model.Comment" parameterType="map">
  		SELECT
- 			`userId`
+ 			`id`
+ 			, `userId`
  			, `postId`
  			, `content`
  			, `createdAt`
