@@ -45,7 +45,15 @@
 							
 								<div class="d-flex justify-content-between p-2">
 									<div> ${postDetail.user.name } </div>
-									<div> <i class="bi bi-three-dots"> </i> </div>
+									<div>
+										<%-- 로그인한 사용자 userId가 해당 게시글의 사용자 userId가 일치하는 경우에 해당 버튼 노출 --%>
+										<c:if test="${userId eq postDetail.user.id}">
+											<%-- 삭제버튼 --%>
+											<a href="#" data-toggle="modal" data-target="#moreModal" class="more-btn" data-post-id="${postDetail.post.id }" >
+												<i class="bi bi-three-dots"> </i>
+											</a>
+										</c:if>
+									</div>
 								</div>
 								
 								<div>
@@ -56,7 +64,7 @@
 								<div class="d-flex p-2">
 									<c:choose>
 										<c:when test="${postDetail.like }" >
-											<a href="#">
+											<a href="#" class="unlike-btn" data-post-id="${postDetail.post.id }">
 												<span class="heart-size text-danger"> <i class="bi bi-heart-fill"> </i> </span>
 											</a>
 										</c:when>
@@ -103,11 +111,79 @@
 		</section>
 	
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+		
+		<!-- Modal -->
+		<div class="modal fade" id="#moreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-body text-center">
+		      	<a href="#" id="deleteBtn"> 삭제하기 </a>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	
 	</div>
 	
 	<script>
 		$(document).ready(function(){
+			
+			$(".more-btn").on("click", function(){
+				// 이벤트가 발생한 버튼에서 post-id를 얻어온다.
+				let postId = $(this).data("post-id");
+				
+				// 삭제하기 버튼에 해당 post-id를 저장한다. (data-post-id 속성에 값을 넣는다.)
+				// <a href="#" id="deleteBtn" data-post-id="8"> 삭제하기 </a>
+				$("#deleteBtn").data("post-id", postId);
+				
+				
+			});
+			
+			$("#deleteBtn").on("click", function(e) {
+				e.preventDefault();
+				
+				let postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/post/delete",
+					data:{"postId":postId},
+					success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("삭제 실패");
+						}
+					},
+					error:function() {
+						alert("삭제 에러");
+					}
+				});
+				
+			});
+			
+			$(".unlike-btn").on("click", function(e){
+				e.preventDefault();
+				// data-post-id
+				let postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/post/unlike",
+					data:{"postId":postId},
+					success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("좋아요 취소 실패..");
+						}
+					},
+					error:function() {
+						alert("좋아요 취소 에러!!");
+					}
+				});
+				
+			});
 			
 			$(".like-btn").on("click", function(e) {
 				e.preventDefault();

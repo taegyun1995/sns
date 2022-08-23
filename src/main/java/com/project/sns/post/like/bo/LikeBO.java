@@ -16,11 +16,18 @@ public class LikeBO {
 		return likeDAO.insertLike(userId, postId);
 	}
 	
+	// 
+	public int unlike(int postId, int userId) {
+		
+		return likeDAO.deleteLike(postId, userId);
+	}
+	
 	// postId로 좋아요 개수 조회
 	public int countLike(int postId) {
 		
 		return likeDAO.selectCountLike(postId);
 	}
+	
 	
 	// 특정 postId에 로그인한 사용자의 userId로 좋아요 했는지 여부
 	public boolean isLike(int postId, int userId) {
@@ -34,5 +41,10 @@ public class LikeBO {
 		}
 		
 	}
-	
+
+	// 해당하는 postId의 좋아요 삭제
+	public int deleteLikeByPostId(int postId) {
+		
+		return likeDAO.deleteLikeByPostId(postId);
+	}
 }
