@@ -6,6 +6,6 @@
 				<h2 class="ml-3"> Sportgram </h2>
 				
 				<c:if test="${not empty userId}" >
-					<div class="mr-3"> ${userName }님 <a href="/user/signout"> 로그아웃 </a> </div>
+					<div class="mr-3"> ${userName }님 <a href="/user/sign/out"> 로그아웃 </a> </div>
 				</c:if>
 			</header>

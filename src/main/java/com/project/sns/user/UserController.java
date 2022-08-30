@@ -22,7 +22,7 @@ public class UserController {
 	}
 	
 	// 로그아웃
-	@GetMapping("/user/signout")
+	@GetMapping("/user/sign/out")
 	public String signOut(HttpServletRequest request) {
 		// 로그아웃 과정
 		// 세션에 로그인 정보 제거 

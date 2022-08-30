@@ -46,11 +46,11 @@
 								<div class="d-flex justify-content-between p-2">
 									<div> ${postDetail.user.name } </div>
 									<div>
-										<%-- 로그인한 사용자 userId가 해당 게시글의 사용자 userId가 일치하는 경우에 해당 버튼 노출 --%>
-										<c:if test="${userId eq postDetail.user.id}">
-											<%-- 삭제버튼 --%>
-											<a href="#" data-toggle="modal" data-target="#moreModal" class="more-btn" data-post-id="${postDetail.post.id }" >
-												<i class="bi bi-three-dots"> </i>
+									<%-- 로그인한 사용자 userId 가 해당 게시글의 사용자 userId 가 일치하는 경우에 해당 버튼 노출 --%>
+										<c:if test="${userId eq postDetail.user.id }">
+										 <%-- 삭제 버튼 --%>
+											<a href="#"  data-toggle="modal" data-target="#moreModal" class="more-btn" data-post-id="${postDetail.post.id }">
+												<i class="bi bi-three-dots"></i>
 											</a>
 										</c:if>
 									</div>
@@ -113,12 +113,14 @@
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 		
 		<!-- Modal -->
-		<div class="modal fade" id="#moreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal fade" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered" role="document">
 		    <div class="modal-content">
+		      
 		      <div class="modal-body text-center">
-		      	<a href="#" id="deleteBtn"> 삭제하기 </a>
+		        <a href="#" id="deleteBtn">삭제하기</a>
 		      </div>
+		      
 		    </div>
 		  </div>
 		</div>
