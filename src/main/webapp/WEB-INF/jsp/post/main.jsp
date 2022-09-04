@@ -138,7 +138,6 @@
 				// <a href="#" id="deleteBtn" data-post-id="8"> 삭제하기 </a>
 				$("#deleteBtn").data("post-id", postId);
 				
-				
 			});
 			
 			$("#deleteBtn").on("click", function(e) {
