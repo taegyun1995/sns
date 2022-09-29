@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
+
 public class FileManagerService {
 	
 	public static final String IMAGE_UPLOAD_PATH =  "/Users/taegyun/mini project/sportgram/upload/";
